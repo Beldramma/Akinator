@@ -164,19 +164,31 @@ int note_personnage(Personnage *perso, int choix,int num) {  /*recupere la répo
   return note;}
     
    
+
 void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
   Personnage* ptr_cour;
   int i;
   ptr_cour=liste_perso->tete;
   for (i=0; i<liste_perso->nb_perso; i++) {
     ptr_cour->note_perso=note_personnage(ptr_cour,choix,num);
+    if ((ptr_cour->note_perso)<(-10)){
+	    /* suppression des personnages avec note <-10 */
+	    
+	    
+	    
+    }
     ptr_cour=ptr_cour->suivant;
-  }}
+  }
 
 
 
-void pose_question(Liste_Perso liste_perso) {
+int pose_question(Liste_Perso liste_perso) {
   int indice_question=1, i;
+	utiliser la fonction note_question
+if(
+    
+    
+    /* voir cours, supprimer des personnages dans la liste si note trop basse */
   
   m=note_question(1);  
   for (i=1; i<nb_qst-1; i++) { 
