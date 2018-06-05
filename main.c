@@ -180,7 +180,27 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
     ptr_cour=ptr_cour->suivant;
   }
 
-
+void supprimer_perso(Liste_Perso *ptr_liste, int rang){
+	Noeud *ptr_cour, *ptr_prec;
+	int i;
+	
+	if(rang==1){
+		ptr_cour=ptr_liste->tete;
+		ptr_liste->tete=ptr_cour->suivant;
+		ptr_cour->precedent=NULL;
+		free(ptr_cour);}
+	else {
+		i=1;
+		ptr_prec=ptr_liste->tete;
+		while(i != rang-1){
+			i++;
+			ptr_prec=ptr_prec->suivant;}
+		ptr_cour=ptr_prec->suivant;
+		ptr_prec->suivant=ptr_cour->suivant;
+		free(ptr_cour);}}
+		     
+		     
+		     
 
 int pose_question(Liste_Perso liste_perso) {
   int indice_question=1, i;
