@@ -180,6 +180,7 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
     ptr_cour=ptr_cour->suivant;
   }
 
+	
 void supprimer_perso(Liste_Perso *ptr_liste, int rang){
 	Noeud *ptr_cour, *ptr_prec;
 	int i;
@@ -187,7 +188,7 @@ void supprimer_perso(Liste_Perso *ptr_liste, int rang){
 	if(rang==1){
 		ptr_cour=ptr_liste->tete;
 		ptr_liste->tete=ptr_cour->suivant;
-		ptr_cour->precedent=NULL;
+		ptr_liste->tete->precedent=NULL;
 		free(ptr_cour);}
 	else {
 		i=1;
@@ -196,7 +197,7 @@ void supprimer_perso(Liste_Perso *ptr_liste, int rang){
 			i++;
 			ptr_prec=ptr_prec->suivant;}
 		ptr_cour=ptr_prec->suivant;
-		ptr_prec->suivant=ptr_cour->suivant;
+		ptr_prec->suivant=ptr_cour->suivant; /* a revoir pour une liste doublement chainee */
 		free(ptr_cour);}}
 		     
 		     
