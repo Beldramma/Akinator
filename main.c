@@ -120,4 +120,97 @@ void jeu(){
     /* creer_question(questions.txt,quest); */
   }}
 
+int note_question(int nb_qst) {    
+
+  int i, j, Q;
+
+  /* reponses: tableau avec le nombre de chaque reponse (incrementée selon les reponses des personnages) */
+  
+  for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
+    for (j=0; j<nb_rep; j++) {    /*parcourir les reponses*/
+        reponses[personnage->vecteur_reponse[j]]++;
+    }
+  }
+
+  
+  Q=1;
+  for (i=0; i<nb_rep; i++) {
+    Q=Q*(reponses[i]+1);
+  }
+
+  return Q;
+}
+		     
+/*FONCTIONS */      
+
+int note_personnage(Personnage *perso, int choix,int num) {  /*recupere la réponse de l'utilisateur et le perso avec lequel on compare*/
+  int a, m, note=0;
+  a=perso->liste_reponses[num].chiffre_reponse /* attention au décalage avec le i, ne pas commencer les numeros des questions à 1 mais à 0 */
+  m=choix-a; /* différence entre la valeur souhaitée et la valeur renseignée */
+  m=fabs(m);
+  if(m==1){
+      note++;}
+  else {
+    if(m==2) {
+	    note--;}
+    else {
+	if(m==3){
+	  note=note-2;}
+	else {
+	  if(m==4){
+	    note=note-3;}
+	  else {
+	    note=note+3;}}}}}
+  return note;}
+    
+   
+void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
+  Personnage* ptr_cour;
+  int i;
+  ptr_cour=liste_perso->tete;
+  for (i=0; i<liste_perso->nb_perso; i++) {
+    ptr_cour->note_perso=note_personnage(ptr_cour,choix,num);
+    ptr_cour=ptr_cour->suivant;
+  }}
+
+
+
+void pose_question(Liste_Perso liste_perso) {
+  int indice_question=1, i;
+  
+  m=note_question(1);  
+  for (i=1; i<nb_qst-1; i++) { 
+      if (note_question(i+1)>m){
+	m=note_question(i+1);
+	indice_question=i;
+      }
+  }
+  /* afficher la question numéro "indice_question" */
+  return;
+}
+
+/*-----------------------------------------*/   
+
+ /* void resultats(Personnages personnages) : entrée :  liste chainée personnages     sortie : /  fonctionnement : affiche le résultat en fonction des notes des personnages (compare les notes).   */
+    
+void resultats(Liste_Perso liste_perso) {
+  Personnage* ptr_cour;
+  int i;
+  char* s;
+  
+  ptr_cour=liste_perso->tete;
+  note=ptr_cour->note_perso;
+  s=ptr_cour->nom_perso;
+  for (i=1; i<liste_perso->nb_perso-1; i++) {
+    ptr_cour=ptr_cour->perso_suiv;
+    if (note<ptr_cour->note_perso) {
+      note=ptr_cour->note_perso;
+      s=ptr_cour->nom_perso;
+    }
+  }
+  printf("%s", s);
+  return;
+}
+
+
 
