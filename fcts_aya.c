@@ -23,14 +23,13 @@ int note_question(int nb_qst) {
 		     
 /*-----------------------------------------*/       
 
-int note_personnage(int* nouveau_reponses, int* perso_reponses) {  /*recuperer les reponses de l'utilisateur et le perso avec lequel on compare*/
-  int k, i, j, m, n=0;
+int note_personnage(int rep_user, int* perso_reponses) {  /*recuperer la réponse de l'utilisateur et le perso avec lequel on compare*/
+  int k, j, m, n=0;
 
   for (k=1; k<qst; k++) {
-    i=nouveau_reponses[k]; /*reponse donnée*/
     j=perso_reponses[k];  /*reponse attendue*/
   
-    m=i-j;
+    m=rep_user-j;
 
     if ( (m==1) || (m=-1) ) {
       n=n+1;
@@ -70,13 +69,13 @@ int note_personnage(int* nouveau_reponses, int* perso_reponses) {  /*recuperer l
  */
 
 
-void maj_note_perso(Liste_Perso* liste_perso) {
+void maj_note_perso(Liste_Perso* liste_perso,int rep_user) {
   Personnage* ptr_cour;
   int i;
   
   ptr_cour=liste_perso->tete;
   for (i=1; i<liste_perso->nb_perso; i++) {
-    ptr_cour->note_perso=note_personnage(nouveau_reponses, ptr_cour->liste_reponse);
+    ptr_cour->note_perso=note_personnage(rep_user, ptr_cour->liste_reponse);
     ptr_cour=ptr_cour->suivant;
   }
 }
@@ -125,6 +124,8 @@ void resultats(Liste_Perso liste_perso) {
   printf("%s", s);
   return;
 }
+
+
   
 
 
