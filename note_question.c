@@ -24,7 +24,7 @@ int note_question(int nb_qst, Liste_Perso *liste_perso) {
 
 
 
-void pose_question(Liste_Perso liste_perso) {
+void pose_question(Liste_Perso liste_perso, Liste_Question liste_question) {
   int indice_question=0, i;
   
   m=note_question(0, liste_perso);  
@@ -33,7 +33,8 @@ void pose_question(Liste_Perso liste_perso) {
 	m=note_question(i+1, liste_perso);
 	indice_question=i;
       }
-  }
+  }  	
   /* afficher la question numéro "indice_question" */
+  printf("%s", liste_question[indice_question]);
   return;
 }
