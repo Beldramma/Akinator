@@ -31,6 +31,7 @@ void init_liste(Liste_Perso *ptr_liste);
 Personnage *creer_personnage(char* nom_perso,int note_perso);
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso);
 void init_rang(Liste_Perso *liste_perso);
+int note_personnage(Personnage *perso, int choix,int num)
 /* ajouter les autres fonctions */
 
 
@@ -159,38 +160,35 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
   ptr_cour=liste_perso->tete;
   for (i=0; i<liste_perso->nb_perso; i++) {
     ptr_cour->note_perso=note_personnage(ptr_cour,choix,num);
+
+	  /* suppresion des personnages avec note <-10 */
     if ((ptr_cour->note_perso)<(-10)){
-	    /* suppression des personnages avec note <-10 */
-	    supprimer_perso(liste_perso,ptr_cour->num);
-	    
-	    
-    }
-    ptr_cour=ptr_cour->suivant;
-  }
+	    supprimer_perso(liste_perso,ptr_cour->num);}   
+    ptr_cour=ptr_cour->perso_suiv;}}
 
 	
 void supprimer_perso(Liste_Perso *ptr_liste, int rang){
 	Noeud *ptr_cour, *ptr_prec;
 	int i;
 	
-	if(rang==1){
+	if(rang==0){
 		ptr_cour=ptr_liste->tete;
-		ptr_liste->tete=ptr_cour->suivant;
-		ptr_liste->tete->precedent=NULL;
+		ptr_liste->tete=ptr_cour->perso_suiv;
+		ptr_liste->tete->perso_prec=NULL;
 		free(ptr_cour);}
 	else {
 		i=1;
 		ptr_prec=ptr_liste->tete;
-		while(i != rang-1){
+		while(i != rang){
 			i++;
-			ptr_prec=ptr_prec->suivant;}
-		ptr_cour=ptr_prec->suivant;
-		ptr_prec->suivant=ptr_cour->suivant; /* a revoir pour une liste doublement chainee */
+			ptr_prec=ptr_prec->perso_suiv;}
+		ptr_cour=ptr_prec->perso_suiv;
+		ptr_prec->perso_suiv=ptr_cour->perso_suiv; 
+		ptr_cour->perso_suiv->perso_prec=ptr_prec;
 		free(ptr_cour);}}
 		     
 		     
-		     
-
+	
 int pose_question(Liste_Perso liste_perso) {
   int indice_question=1, i;
 	utiliser la fonction note_question
