@@ -31,7 +31,10 @@ void init_liste(Liste_Perso *ptr_liste);
 Personnage *creer_personnage(char* nom_perso,int note_perso);
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso);
 void init_rang(Liste_Perso *liste_perso);
-int note_personnage(Personnage *perso, int choix,int num)
+int note_personnage(Personnage *perso, int choix,int num);
+void maj_note_perso(Liste_Perso* liste_perso,int choix, int num);
+void supprimer_perso(Liste_Perso *ptr_liste, int rang);
+
 /* ajouter les autres fonctions */
 
 
@@ -164,6 +167,7 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
 	  /* suppresion des personnages avec note <-10 */
     if ((ptr_cour->note_perso)<(-10)){
 	    supprimer_perso(liste_perso,ptr_cour->num);}   
+	  
     ptr_cour=ptr_cour->perso_suiv;}}
 
 	
@@ -187,50 +191,7 @@ void supprimer_perso(Liste_Perso *ptr_liste, int rang){
 		ptr_cour->perso_suiv->perso_prec=ptr_prec;
 		free(ptr_cour);}}
 		     
-		     
-	
-int pose_question(Liste_Perso liste_perso) {
-  int indice_question=1, i;
-	utiliser la fonction note_question
-if(
-    
-    
-    /* voir cours, supprimer des personnages dans la liste si note trop basse */
-  
-  m=note_question(1);  
-  for (i=1; i<nb_qst-1; i++) { 
-      if (note_question(i+1)>m){
-	m=note_question(i+1);
-	indice_question=i;
-      }
-  }
-  /* afficher la question numéro "indice_question" */
-  return;
-}
-
-	
-	
-int note_question(int nb_qst) {    
-
-  int i, j, Q;
-
-  /* reponses: tableau avec le nombre de chaque reponse (incrementée selon les reponses des personnages) */
-  
-  for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
-    for (j=0; j<nb_rep; j++) {    /*parcourir les reponses*/
-        reponses[personnage->vecteur_reponse[j]]++;
-    }
-  }
-
-  
-  Q=1;
-  for (i=0; i<nb_rep; i++) {
-    Q=Q*(reponses[i]+1);
-  }
-
-  return Q;
-}
-/*-----------------------------------------*/   
+ 
 
  /* void resultats(Personnages personnages) : entrée :  liste chainée personnages     sortie : /  fonctionnement : affiche le résultat en fonction des notes des personnages (compare les notes).   */
     
