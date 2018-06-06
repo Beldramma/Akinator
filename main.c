@@ -34,6 +34,7 @@ void init_rang(Liste_Perso *liste_perso);
 int note_personnage(Personnage *perso, int choix,int num);
 void maj_note_perso(Liste_Perso* liste_perso,int choix, int num);
 void supprimer_perso(Liste_Perso *ptr_liste, int rang);
+void resultats(Liste_Perso liste_perso);
 
 /* ajouter les autres fonctions */
 
@@ -203,15 +204,12 @@ void resultats(Liste_Perso liste_perso) {
   ptr_cour=liste_perso->tete;
   note=ptr_cour->note_perso;
   s=ptr_cour->nom_perso;
-  for (i=1; i<liste_perso->nb_perso-1; i++) {
+  for (i=0; i<liste_perso->nb_perso; i++) {
     ptr_cour=ptr_cour->perso_suiv;
     if (note<ptr_cour->note_perso) {
       note=ptr_cour->note_perso;
-      s=ptr_cour->nom_perso;
-    }
-  }
+      s=ptr_cour->nom_perso;}}
   printf("%s", s);
-  return;
 }
 
 
