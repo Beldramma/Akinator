@@ -12,6 +12,7 @@ typedef struct{
 typedef struct personnage{
   char nom_perso[20];
   int note_perso;
+  int num;
   Reponse *liste_reponses;
   struct personnage *perso_suiv;
   struct personnage *perso_prec;
@@ -29,6 +30,7 @@ typedef struct {
 void init_liste(Liste_Perso *ptr_liste);
 Personnage *creer_personnage(char* nom_perso,int note_perso);
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso);
+void init_rang(Liste_Perso *liste_perso);
 /* ajouter les autres fonctions */
 
 
@@ -48,6 +50,15 @@ Personnage *creer_personnage(char *nom_perso,int note_perso)
   perso->perso_prec=NULL;
   return perso;
 }
+
+void init_rang(Liste_Perso liste_perso){
+Personnage *ptr_cour;
+ptr_cour=liste_perso->tete;
+for(i=0;i<liste_perso->nb_perso;i++){
+	ptr_cour->num=i;
+	ptr_cour=ptr_cour->perso_suiv;
+}}
+	
 
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso)
 {
@@ -120,26 +131,7 @@ void jeu(){
     /* creer_question(questions.txt,quest); */
   }}
 
-int note_question(int nb_qst) {    
 
-  int i, j, Q;
-
-  /* reponses: tableau avec le nombre de chaque reponse (incrementée selon les reponses des personnages) */
-  
-  for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
-    for (j=0; j<nb_rep; j++) {    /*parcourir les reponses*/
-        reponses[personnage->vecteur_reponse[j]]++;
-    }
-  }
-
-  
-  Q=1;
-  for (i=0; i<nb_rep; i++) {
-    Q=Q*(reponses[i]+1);
-  }
-
-  return Q;
-}
 		     
 /*FONCTIONS */      
 
@@ -150,17 +142,13 @@ int note_personnage(Personnage *perso, int choix,int num) {  /*recupere la répo
   m=fabs(m);
   if(m==1){
       note++;}
-  else {
-    if(m==2) {
-	    note--;}
-    else {
-	if(m==3){
+  else if{(m==2) {
+    note--;}
+  else if{(m==3){
 	  note=note-2;}
-	else {
-	  if(m==4){
-	    note=note-3;}
-	  else {
-	    note=note+3;}}}}}
+  else if{(m==4){
+	  note=note-3;}
+  else {note=note+3;}}}}}
   return note;}
     
    
@@ -173,7 +161,7 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num) {
     ptr_cour->note_perso=note_personnage(ptr_cour,choix,num);
     if ((ptr_cour->note_perso)<(-10)){
 	    /* suppression des personnages avec note <-10 */
-	    
+	    supprimer_perso(liste_perso,ptr_cour->num);
 	    
 	    
     }
@@ -222,6 +210,28 @@ if(
   return;
 }
 
+	
+	
+int note_question(int nb_qst) {    
+
+  int i, j, Q;
+
+  /* reponses: tableau avec le nombre de chaque reponse (incrementée selon les reponses des personnages) */
+  
+  for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
+    for (j=0; j<nb_rep; j++) {    /*parcourir les reponses*/
+        reponses[personnage->vecteur_reponse[j]]++;
+    }
+  }
+
+  
+  Q=1;
+  for (i=0; i<nb_rep; i++) {
+    Q=Q*(reponses[i]+1);
+  }
+
+  return Q;
+}
 /*-----------------------------------------*/   
 
  /* void resultats(Personnages personnages) : entrée :  liste chainée personnages     sortie : /  fonctionnement : affiche le résultat en fonction des notes des personnages (compare les notes).   */
