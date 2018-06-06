@@ -5,7 +5,7 @@ int note_question(int nb_qst, Liste_Perso *liste_perso) {
   int i, j, Q;
   int reponses[nb_rep];
   personnage* ptr_cour;
-  /* reponses: tableau avec le nombre de chaque reponse (incrementée selon les reponses des personnages) */  
+  /* reponses: tableau tel que l'indice de la case est la réponse et le contenu est le nombre d'occurence de la réponses chez les personnages (incrementée selon les reponses des personnages) */  
   ptr_cour=liste_perso->tete;  
   for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
       reponses[ptr_cour->liste_reponses[nb_qst]->chiffre_reponse]++;
