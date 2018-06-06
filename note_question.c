@@ -3,16 +3,19 @@
 int note_question(int nb_qst, Liste_Perso *liste_perso) {    
 
   int i, j, Q;
-  int reponses[nb_rep];
+  int reponses[6];
   personnage* ptr_cour;
+	/* initialisation tableau */
+	for (i=0; i<6; i++) {
+		reponses[i]=0; }
   /* reponses: tableau tel que l'indice de la case est la réponse et le contenu est le nombre d'occurence de la réponses chez les personnages (incrementée selon les reponses des personnages) */  
   ptr_cour=liste_perso->tete;  
   for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
       reponses[ptr_cour->liste_reponses[nb_qst]->chiffre_reponse]++;
-      ptr_cour=ptr_cour->suivant;
+      ptr_cour=ptr_cour->perso_suiv;
   }
   Q=1;
-  for (i=0; i<nb_rep; i++) {
+  for (i=0; i<6; i++) {
     Q=Q*(reponses[i]+1);
   }
 
