@@ -19,3 +19,18 @@ int note_question(int nb_qst, Liste_Perso *liste_perso) {
   return Q;
 }
 
+
+
+void pose_question(Liste_Perso liste_perso) {
+  int indice_question=1, i;
+  
+  m=note_question(1);  
+  for (i=1; i<nb_qst-1; i++) { 
+      if (note_question(i+1)>m){
+	m=note_question(i+1);
+	indice_question=i;
+      }
+  }
+  /* afficher la question numéro "indice_question" */
+  return;
+}
