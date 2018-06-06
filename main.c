@@ -35,6 +35,9 @@ int note_personnage(Personnage *perso, int choix,int num);
 void maj_note_perso(Liste_Perso* liste_perso,int choix, int num);
 void supprimer_perso(Liste_Perso *ptr_liste, int rang);
 void resultats(Liste_Perso liste_perso);
+/*-----*/
+int note_question(int nb_qst, Liste_Perso *liste_perso);
+void pose_question(Liste_Perso liste_perso) ;
 
 /* ajouter les autres fonctions */
 
