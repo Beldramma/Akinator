@@ -22,12 +22,12 @@ int note_question(int nb_qst, Liste_Perso *liste_perso) {
 
 
 void pose_question(Liste_Perso liste_perso) {
-  int indice_question=1, i;
+  int indice_question=0, i;
   
-  m=note_question(1);  
-  for (i=1; i<nb_qst-1; i++) { 
-      if (note_question(i+1)>m){
-	m=note_question(i+1);
+  m=note_question(0, liste_perso);  
+  for (i=0; i<nb_qst-1; i++) { 
+      if (note_question(i+1, liste_perso)>m){
+	m=note_question(i+1, liste_perso);
 	indice_question=i;
       }
   }
