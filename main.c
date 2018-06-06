@@ -27,7 +27,7 @@ typedef struct {
 /* LEO : ajouter les structures pour les questions */
 
 /* Definition des differentes fonctions utilisees */
-void init_liste(Liste_Perso *ptr_liste);
+ListeDouble init_liste();
 Personnage *creer_personnage(char* nom_perso,int note_perso);
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso);
 void init_rang(Liste_Perso *liste_perso);
@@ -36,16 +36,21 @@ void maj_note_perso(Liste_Perso* liste_perso,int choix, int num);
 void supprimer_perso(Liste_Perso *ptr_liste, int rang);
 void resultats(Liste_Perso liste_perso);
 int note_question(int nb_qst, Liste_Perso *liste_perso);
-/*-----*/
 void pose_question(Liste_Perso liste_perso) ;
 
-/* ajouter les autres fonctions */
+
 
 
 /* Initialisation des listes et structures */
 
-void init_liste(Liste_Perso *ptr_liste)
-{	ptr_liste->nb_perso=0;}
+ListeDouble init_liste()
+{	
+	ListeDouble *ptr_liste;
+	ptr_liste=(ListeDouble*)malloc(sizeof(ListeDouble)));
+	ptr_liste->tete=NULL;
+	ptr_liste->nb_perso=0;
+return ptr_liste;
+}
 
 
 Personnage *creer_personnage(char *nom_perso,int note_perso)
@@ -85,6 +90,8 @@ void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso)
 /* Programme principal */
 
 int main(){
+
+	liste=init_liste();
   jeu();
 
   /*
@@ -214,6 +221,7 @@ void resultats(Liste_Perso liste_perso) {
       s=ptr_cour->nom_perso;}}
   printf("%s", s);
 }
+
 
 
 
