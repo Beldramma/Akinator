@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define nb_question 8
+
+int nb_question;
 
 typedef struct lecture_question {
 	int numero;
@@ -13,13 +14,22 @@ void question(Question* l)
 {
 	FILE* flux;
 	flux=fopen("Questions.txt","r");
-	
+	char c;
+	while((c=fgetc(flux))!=EOF)
+	{
+		if(c=='\n')
+		{
+			nb_question++;
+		}
+	}
+	fseek(flux,0,SEEK_SET);
+	printf("Nombre de question:%d\n",nb_question);
 	int j=0;
 	/*l=(Question*)malloc(sizeof(Question));*/
 		
-	while ((feof(flux)==0)&&(j<nb_question))
+	while (/*(feof(flux)==0)&&*/(j<nb_question))
 	{
-		fgets(l[j].question,sizeof(l[j].question),flux);
+		fgets(l[j].question,70,flux);
 		l[j].numero=j;
 		j++;	
 	}
@@ -28,7 +38,8 @@ void question(Question* l)
 
 int main()
 {
-	Question Q[10];
+	Question* Q;
+	Q=(Question*)malloc(10*(sizeof(Question)));
 	int i;
 	question(Q);
 	for(i=0;i<nb_question;i++)
