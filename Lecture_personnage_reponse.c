@@ -159,12 +159,53 @@ Liste_Perso* recuperation_nom_reponse()
 	return ptr_liste;
 }
 
+void ecriture_fichier(Personnage *P)
+{
+	FILE *flux;
+	int i;
+	int c;
+	flux=fopen("Population.txt","r+");
+	if (flux==NULL)
+	{
+		printf("Pas de fichiers\n");
+		return;
+	}
+
+	fseek(flux,0,SEEK_END);
+
+	fputs(P->nom_perso,flux);
+	fputc('\n',flux);
+	for(i=0;i<nb_reponse;i++)
+	{
+		c=P->liste_reponse[i];
+		printf("%d\t",c);
+		fputc(48+c,flux);
+		fputc(' ',flux);
+	}
+	printf("\n");
+	fputc('-',flux);
+	fputc('1',flux);
+	fputc('\n',flux);
+	fclose(flux);
+}
+
 
 int main()
 {
 	Liste_Perso *ptr_liste;
+	Personnage *P;
+	int i;
 	ptr_liste=recuperation_nom_reponse();
 	printf("nombre_perso=%d\n",ptr_liste->nb_perso);
 	afficher_element(*ptr_liste);
+	P=(Personnage*)malloc(sizeof(Personnage));
+	P->nom_perso=(char*)malloc(13*sizeof(char));
+	strcpy(P->nom_perso,"Nathan Drake");
+	P->liste_reponse=(int*)malloc(nb_reponse*sizeof(int));
+	for(i=0;i<nb_reponse;i++)
+	{
+		P->liste_reponse[i]=4;
+	}
+	ecriture_fichier(P);
 	return 0;
 }
