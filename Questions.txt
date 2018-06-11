@@ -1,0 +1,11 @@
+Votre personnage fait-il de la politique ?
+Votre personnage est-il un homme ?
+Connaissez-vous votre personnage personnellement ?
+Votre personnage est-il enseignant ?
+Votre personnage est-il un acteur ?
+Votre personnage est-il blond ?
+Votre personnage est-il fictif ?
+Votre personnage a-t-il eu une marionnette aux guignols de l info ?
+Votre personnage est-il vivant?
+Votre personnage est-il un sportif professionnel?
+Votre personnage est-il américain?

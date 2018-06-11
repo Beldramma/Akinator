@@ -1,0 +1,38 @@
+Stefan Derrick
+0 1 5 5 4 4 2 5 0 5 5 -1
+Tinky Winky (teletubbies)
+0 4 5 0 3 4 1 5 0 5 0 -1
+Babar (le roi des elephants)
+2 2 0 4 5 0 1 5 0 5 0 -1
+Columbo
+4 1 0 4 4 0 2 0 0 5 1 -1
+Dora l exploratrice
+0 0 5 4 4 5 1 0 0 5 1 -1
+Lucky Luke
+0 1 4 5 0 5 1 5 0 5 5 -1
+Mick Jagger
+2 0 5 5 5 0 5 4 1 5 5 -1
+Jacques Chirac
+5 1 5 0 0 4 5 1 1 5 5 -1
+Nelson Mandela
+1 1 5 0 5 5 5 5 5 5 5 -1
+Justin Bieber
+5 1 5 5 5 1 5 1 1 5 5 -1
+Emma Watson
+1 5 5 0 1 4 5 5 1 5 5 -1
+Angelina Jolie
+4 5 5 0 1 1 5 1 1 5 1 -1
+Donald Trump
+1 1 5 5 2 1 5 1 1 5 1 -1
+Rafael Nadal
+4 1 5 5 4 5 5 1 1 1 5 -1
+Leonardo DiCaprio
+2 1 5 0 1 1 5 1 1 5 1 -1
+Heath Ledger
+4 1 5 0 1 5 5 5 5 5 5 -1
+John Cena
+5 1 5 0 1 1 5 5 1 1 1 -1
+Tupac Shakur
+0 1 5 0 1 5 5 5 5 5 1 -1
+Darth Vader
+
