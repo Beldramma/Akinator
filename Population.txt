@@ -35,4 +35,14 @@ John Cena
 Tupac Shakur
 0 1 5 0 1 5 5 5 5 5 1 -1
 Darth Vader
-
+0 1 0 1 5 5 1 5 5 0 0 -1
+Yoda
+5 1 0 1 5 5 1 5 5 5 5 -1
+Grand Amiral Thrawn
+5 1 0 5 5 5 1 5 1 5 5 -1
+Luke Skywalker
+5 1 0 1 5 5 1 5 1 5 5 -1
+Leia Organa
+1 5 0 5 5 5 1 5 1 5 5 -1
+Ashoka Tano
+5 5 0 1 5 5 1 5 1 5 5 -1
