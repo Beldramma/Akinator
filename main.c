@@ -27,7 +27,7 @@ typedef struct {
 /* LEO : ajouter les structures pour les questions */
 
 /* Definition des differentes fonctions utilisees */
-ListeDouble init_liste();
+Liste_Perso init_liste();
 Personnage *creer_personnage(char* nom_perso,int note_perso);
 void ajout_personnage(Liste_Perso *ptr_liste,Personnage *ptr_perso);
 void init_rang(Liste_Perso *liste_perso);
@@ -43,10 +43,10 @@ void pose_question(Liste_Perso liste_perso, Liste_Question liste_question) ;
 
 /* Initialisation des listes et structures */
 
-ListeDouble init_liste()
+Liste_Perso init_liste()
 {	
-	ListeDouble *ptr_liste;
-	ptr_liste=(ListeDouble*)malloc(sizeof(ListeDouble)));
+	Liste_Perso *ptr_liste;
+	ptr_liste=(Liste_Perso*)malloc(sizeof(Liste_Perso)));
 	ptr_liste->tete=NULL;
 	ptr_liste->nb_perso=0;
 return ptr_liste;
