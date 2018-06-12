@@ -196,6 +196,7 @@ void question(Question* l)
 	{
 		fgets(l[j].question,70,flux);
 		l[j].numero=j;
+		l[j].deja_pose=0;
 		j++;
 	}
 	fclose(flux);
@@ -234,12 +235,12 @@ void jeu(Personnage* P, Liste_Perso* liste_perso, Question* liste_question)
   for(i=1;i<=20;i++){
     
     printf("\nQuestion %d : ",i);
-     q=pose_question(liste_perso,liste_question);
+     q=pose_question(*liste_perso,liste_question);
     printf("\n");
     printf("Votre reponse :\nSurement (1)  Probablement oui (2)  Je ne sais pas (3)  Probablement non (4) Surement pas (5)\n");
     /*Rajouter que si différent de 1,2,3,4,5 ne pas accepter*/
     scanf("%d",&choix);
-
+    P->liste_reponse[i]=choix;
      maj_note_perso(liste_perso,choix,q);
   }
   printf("\nOk je pense que j'ai trouvé ! Votre personnage est ... ");
@@ -286,19 +287,15 @@ void maj_note_perso(Liste_Perso* liste_personnage,int choix, int num)
   int i;
 
   ptr_cour=(Personnage*)malloc(sizeof(Personnage));
-  afficher_element(*liste_personnage);
   ptr_cour=liste_personnage->tete;
-  printf("OK\n");
   for (i=0; i<liste_personnage->nb_perso; i++) {
  
     ptr_cour->note_perso=note_personnage(ptr_cour,choix,num);
 
 	  /* suppresion des personnages avec note <-10 */
     if ((ptr_cour->note_perso)<(-10)){
-    	printf("OK\n");
 	    supprimer_perso(liste_personnage,ptr_cour->num);
 	}   
-	  printf("OK\n");
     ptr_cour=ptr_cour->perso_suiv;
 }
 }
@@ -342,25 +339,33 @@ void resultat(Liste_Perso *liste_personnage)
   printf("%s", s);
 }
 
-int note_question(int nb_qst, Liste_Perso *liste_personnage) 
+int note_question(int nb_qst, Liste_Perso liste_personnage) 
 {    
 
-  int i, Q;
+  int i,j, Q;
   int reponses[nb_question];
   Personnage* ptr_cour;
+
 	/* initialisation tableau */
-	for (i=0; i<nb_question; i++) {
+	for (i=1; i<=5; i++) {
 		reponses[i]=0; }
 
   /* reponses: tableau tel que l'indice de la case est la réponse et le contenu est le nombre d'occurence de la réponses chez les personnages (incrementée selon les reponses des personnages) */  
   ptr_cour=(Personnage*)malloc(sizeof(Personnage));
-  ptr_cour=liste_personnage->tete;  
-  for (i=0; i<nb_perso; i++) {     /*parcourir les personnages*/
-      reponses[ptr_cour->liste_reponse[nb_qst]]++;
-      ptr_cour=ptr_cour->perso_suiv;
-  }
+  ptr_cour=liste_personnage.tete;
+  for(j=1;j<=5;j++)
+  {
+	  while(ptr_cour!=NULL) {     /*parcourir les personnages*/
+  			if(ptr_cour->liste_reponse[nb_qst]==j)
+  			{
+	      		reponses[j]++;
+	      	}
+	      ptr_cour=ptr_cour->perso_suiv;
+	  }
+	  ptr_cour=liste_personnage.tete;
+	}
   Q=1;
-  for (i=0; i<6; i++) {
+  for (i=1; i<6; i++) {
     Q=Q*(reponses[i]+1);
   }
   return Q;
@@ -368,18 +373,29 @@ int note_question(int nb_qst, Liste_Perso *liste_personnage)
 
 
 
-int pose_question(Liste_Perso *liste_personnage, Question *liste_question) 
+int pose_question(Liste_Perso liste_personnage, Question *liste_question) 
 { int m;
-  int indice_question=0, i;
- 
-  m=note_question(0, liste_personnage);  
-  for (i=0; i<nb_question-1; i++) { 
-      if (note_question(i+1, liste_personnage)>m){
-	m=note_question(i+1, liste_personnage);
-	indice_question=i;
+  int indice_question, i,j=0;
+  while(liste_question[j].deja_pose!=0)
+  {
+  	  m=note_question(j, liste_personnage);
+  	  indice_question=j;
+  	  j++;
+  }
+
+  for (i=j+1; i<nb_question; i++) {
+  		if (liste_question[i].deja_pose==0)
+  		{
+	      if (note_question(i, liste_personnage)>m){
+			m=note_question(i, liste_personnage);
+			indice_question=i;
+			printf("indice :%d\n",indice_question);
+		}
       }
   }  	
   /* afficher la question numéro "indice_question" */
+  	
   printf("%s", liste_question[indice_question].question);
+  liste_question[indice_question].deja_pose=1;
   return indice_question;
 }

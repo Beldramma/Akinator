@@ -3,6 +3,7 @@
 typedef struct lecture_question {
 	int numero;
 	char question[70];
+	int deja_pose;
 }Question;
 
 typedef struct personnage {
@@ -32,6 +33,6 @@ int note_personnage(Personnage *perso, int choix,int num);
 void maj_note_perso(Liste_Perso* liste_personnage,int choix, int num);
 void supprimer_perso(Liste_Perso *ptr_liste, int rang);
 void resultat(Liste_Perso *liste_personnage);
-int note_question(int nb_qst,Liste_Perso *liste_personnage);
-int pose_question(Liste_Perso *liste_personnage, Question *liste_question);
+int note_question(int nb_qst,Liste_Perso liste_personnage);
+int pose_question(Liste_Perso liste_personnage, Question *liste_question);
 
